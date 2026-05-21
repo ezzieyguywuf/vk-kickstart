@@ -247,7 +247,7 @@ pub fn createDebugMessenger(
     instance: Instance,
     settings: DebugMessengerSettings,
     allocation_callbacks: ?*const vk.AllocationCallbacks,
-) !?vk.DebugUtilsMessengerEXT {
+) !vk.DebugUtilsMessengerEXT {
     assert(instance.handle != .null_handle);
 
     const debug_info = vk.DebugUtilsMessengerCreateInfoEXT{
@@ -264,13 +264,13 @@ pub fn createDebugMessenger(
 
 pub fn destroyDebugMessenger(
     instance: Instance,
-    debug_messenger: ?vk.DebugUtilsMessengerEXT,
+    debug_messenger: vk.DebugUtilsMessengerEXT,
     allocation_callbacks: ?*const vk.AllocationCallbacks,
 ) void {
     assert(instance.handle != .null_handle);
-    assert(debug_messenger != null);
+    assert(debug_messenger != .null_handle);
 
-    instance.destroyDebugUtilsMessengerEXT(debug_messenger.?, allocation_callbacks);
+    instance.destroyDebugUtilsMessengerEXT(debug_messenger, allocation_callbacks);
 }
 
 fn defaultDebugMessageCallback(

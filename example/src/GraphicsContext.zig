@@ -12,7 +12,7 @@ pub const CommandBuffer = vk.CommandBufferProxy;
 
 allocator: std.mem.Allocator,
 instance: Instance,
-debug_messenger: ?vk.DebugUtilsMessengerEXT,
+debug_messenger: vk.DebugUtilsMessengerEXT,
 device: Device,
 physical_device: vkk.PhysicalDevice,
 surface: vk.SurfaceKHR,
