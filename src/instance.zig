@@ -243,6 +243,11 @@ pub fn create(
     return instance;
 }
 
+pub fn destroy(instance: Instance, allocator: Allocator, allocation_callbacks: ?*const vk.AllocationCallbacks) void {
+    instance.destroyInstance(allocation_callbacks);
+    allocator.destroy(instance.wrapper);
+}
+
 pub fn createDebugMessenger(
     instance: Instance,
     settings: DebugMessengerSettings,

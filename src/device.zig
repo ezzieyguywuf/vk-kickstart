@@ -116,6 +116,11 @@ pub fn create(
     return device;
 }
 
+pub fn destroy(device: Device, allocator: Allocator, allocation_callbacks: ?*const vk.AllocationCallbacks) void {
+    device.destroyDevice(allocation_callbacks);
+    allocator.destroy(device.wrapper);
+}
+
 fn printEnabledFeatures(comptime T: type, features: T) void {
     const info = @typeInfo(T);
     if (info != .@"struct") @compileError("must be a struct");
