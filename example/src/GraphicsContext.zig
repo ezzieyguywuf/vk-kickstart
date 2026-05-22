@@ -102,12 +102,10 @@ pub fn init(allocator: std.mem.Allocator, window: *c.GLFWwindow) !GraphicsContex
     };
 }
 
-pub fn deinit(self: *GraphicsContext) void {
-    self.device.destroyDevice(null);
+pub fn deinit(self: *const GraphicsContext) void {
+    vkk.device.destroy(self.device, self.allocator, null);
     self.instance.destroySurfaceKHR(self.surface, null);
     vkk.instance.destroyDebugMessenger(self.instance, self.debug_messenger, null);
-    self.instance.destroyInstance(null);
+    vkk.instance.destroy(self.instance, self.allocator, null);
     self.physical_device.deinit();
-    self.allocator.destroy(self.instance.wrapper);
-    self.allocator.destroy(self.device.wrapper);
 }
